@@ -1,0 +1,6 @@
+.pool {
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+    margin: 10px;
+}
