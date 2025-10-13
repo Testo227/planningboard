@@ -1,6 +1,9 @@
 .pool {
-    display: flex;
-    flex-direction: row;
-    background-color: black;
-    margin: 10px;
+  display: flex;
+  flex-wrap: wrap; /* <— erlaubt Umbruch */
+  gap: 10px;       /* Abstand zwischen Karten */
+  background-color: black;
+  padding: 10px;
+  margin: 10px;
+  justify-content: center; /* optional: zentriert die Karten */
 }

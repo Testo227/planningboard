@@ -8,7 +8,16 @@ import '../styles/card.css'
 import Modal from './Modal';
 
 
-const Card = ({name}) => {
+const Card = ({
+    machineid, 
+    slotName, 
+    setSlotList, 
+    slotList, 
+    machineposition,
+    currentmachine, 
+    machinelist,
+    setmachinelist}) => {
+
     const [showModal,setShowModal] = useState(true);
     const handleClick = () => {
         setShowModal(!showModal)
@@ -22,7 +31,8 @@ const Card = ({name}) => {
         <div className="card">
             {showModal ? (
         <div onClick={handleClick}>
-            <p>{name}</p>
+            <p>{machineid}</p>
+            <p>{slotName}</p>
             <img src='/machine.jpg' alt='machine' style={{width:'80px', height:'80px'}}/>
         </div>
         ) : (
@@ -33,7 +43,15 @@ const Card = ({name}) => {
             kNummer={kNummer}
             setDate={setDate} 
             date={date}
-            handleClick={handleClick}/>   
+            handleClick={handleClick}
+            slotName={slotName}
+            setSlotList={setSlotList}
+            slotList={slotList}
+            machineid={machineid}
+            machineposition={machineposition}
+            currentmachine={currentmachine}
+            setmachinelist={setmachinelist}
+            machinelist={machinelist}/>
         )}
         </div>
         

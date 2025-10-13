@@ -9,7 +9,6 @@ const MainBoard = () => {
     return ( 
         <div>
             <Pool/>
-            <Line/>
         </div>
      )
 }
