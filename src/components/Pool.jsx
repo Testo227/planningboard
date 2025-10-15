@@ -27,10 +27,10 @@ const Pool = () => {
     
     //dummy data
     const [machinelist, setmachinelist] = useState([
-        {id:1, machine:"Machine 1", position:"Slot 2"},
-        {id:2, machine:"Machine 2", position:"Slot 4"},
-        {id:3, machine:"Machine 3", position:"Slot 5"},
-        {id:4, machine:"Machine 4", position:"Slot 7"}])
+        {id:1, machine:"Machine 1", position:"Slot 2", kunde: "Firma A", kNummer: "K123", date: "2023-10-01"},
+        {id:2, machine:"Machine 2", position:"Slot 4", kunde: "Firma B", kNummer: "K456", date: "2023-11-15"},
+        {id:3, machine:"Machine 3", position:"Slot 5" ,kunde: "Firma C", kNummer: "K789", date: "2023-12-20"},
+        {id:4, machine:"Machine 4", position:"Slot 7", kunde: "Firma D", kNummer: "K012", date: "2024-01-10"}])
 
     return ( 
         <div className="pool">

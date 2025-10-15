@@ -23,9 +23,7 @@ const Card = ({
         setShowModal(!showModal)
     }
 
-    const [kunde, setKunde] = useState('');
-    const [kNummer, setKNummer] = useState('');
-    const [date, setDate] = useState('');
+    
 
     return (
         <div className="card">
@@ -37,12 +35,6 @@ const Card = ({
         </div>
         ) : (
         <Modal 
-            setKunde={setKunde} 
-            kunde={kunde}
-            setKNummer={setKNummer} 
-            kNummer={kNummer}
-            setDate={setDate} 
-            date={date}
             handleClick={handleClick}
             slotName={slotName}
             setSlotList={setSlotList}
@@ -51,7 +43,8 @@ const Card = ({
             machineposition={machineposition}
             currentmachine={currentmachine}
             setmachinelist={setmachinelist}
-            machinelist={machinelist}/>
+            machinelist={machinelist}
+            setShowModal={setShowModal}/>
         )}
         </div>
         
