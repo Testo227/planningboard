@@ -7,16 +7,18 @@ import '../styles/slot.css'
 //Components
 import Card from './Card';
 
-const Slot = ({slotName, machinelist, setmachinelist, setSlotList, slotList}) => {
+const Slot = ({slotName, machinelist, setmachinelist, setSlotList, slotList, areas, thisarea}) => {
     
-    const currentMachine = machinelist.find(m => m.position === slotName);
+    const currentMachine = machinelist.find(
+        m => m.position === slotName && m.area === thisarea.name);
 
     const handleCreateMachine = () => {
         if(!currentMachine) {
             const newMachine = {
                 id: machinelist.length + 1,
                 machine: `Machine ${machinelist.length + 1}`,
-                position: slotName
+                position: slotName,
+                area: thisarea.name
             };
             setmachinelist([...machinelist, newMachine])
             setSlotList(slotList.map(s => s.slotName === slotName ? {...s, occupied: true} : s))
@@ -35,7 +37,8 @@ const Slot = ({slotName, machinelist, setmachinelist, setSlotList, slotList}) =>
                     setSlotList={setSlotList}
                     slotList={slotList}
                     setmachinelist={setmachinelist}
-                    machinelist={machinelist}/>
+                    machinelist={machinelist}
+                    areas={areas}/>
 
             ) : (
                 <h1>+</h1>  

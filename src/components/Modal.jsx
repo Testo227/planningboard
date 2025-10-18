@@ -9,61 +9,81 @@ import '../styles/modal.css'
 const Modal = ({
     handleClick, 
     slotName,
-    setSlotList,
-    slotList,
+    setAreas,
+    areas,
     machineid,
     machineposition,
     currentmachine,
     setmachinelist,
-    machinelist,
-    setShowModal}) => {
+    machinelist}) => {
 
-    /*
+    const [selectedSlot, setSelectedSlot] = useState("");
+
     const handleSwitch = (e) => {
-        const newPosition = e.target.value;
-        setmachinelist(machinelist.map(m => m.id === machineid ? {...m, position: newPosition} : m));
-        setSlotList(
-            slotList.map(s => {
-                if (s.slotName === slotName) return { ...s, occupied: false }; // alter Slot auf leer setzten
-                if (s.slotName === newPosition) return { ...s, occupied: true }; // neuer Slot belegt setzten
-                return s;
-        }))};
-    */
-const handleSwitch = (e) => {
-  const newPosition = e.target.value;
+    const [newAreaName, newSlotName] = e.target.value.split(":");
+    setSelectedSlot(e.target.value);
 
-  // Finde Maschine, die aktuell in den Zielslot gehört (falls belegt)
-  const targetMachine = machinelist.find(m => m.position === newPosition);
+    const targetMachine = machinelist.find(
+      m => m.area === newAreaName && m.position === newSlotName
+    );
 
-  // Wenn Slot leer → einfache Bewegung
-  if (!targetMachine) {
-    setmachinelist(machinelist.map(m =>
-      m.id === machineid ? { ...m, position: newPosition } : m
-    ));
+    if (!targetMachine) {
+      // 🟩 Slot ist frei → einfach verschieben
+      setmachinelist(prev =>
+        prev.map(m =>
+          m.id === currentmachine.id
+            ? { ...m, area: newAreaName, position: newSlotName }
+            : m
+        )
+      );
 
-    setSlotList(slotList.map(s => {
-      if (s.slotName === slotName) return { ...s, occupied: false };
-      if (s.slotName === newPosition) return { ...s, occupied: true };
-      return s;
-    }));
-  } 
-  // Wenn Slot belegt → Maschinen tauschen
-  else {
-    setmachinelist(machinelist.map(m => {
-      if (m.id === machineid) {
-        // aktuelle Maschine in Zielslot bewegen
-        return { ...m, position: newPosition };
-      }
-      if (m.id === targetMachine.id) {
-        // Maschine aus Zielslot in alten Slot verschieben
-        return { ...m, position: slotName };
-      }
-      return m;
-    }));
+      // 🟨 Slots updaten: alter Slot leer, neuer belegt
+      setAreas(prev =>
+        prev.map(area => {
+          // alter Bereich → Slot frei
+          if (area.name === currentmachine.area) {
+            return {
+              ...area,
+              slots: area.slots.map(slot =>
+                slot.name === currentmachine.position
+                  ? { ...slot, occupied: false }
+                  : slot
+              )
+            };
+          }
+          // neuer Bereich → Slot belegt
+          if (area.name === newAreaName) {
+            return {
+              ...area,
+              slots: area.slots.map(slot =>
+                slot.name === newSlotName
+                  ? { ...slot, occupied: true }
+                  : slot
+              )
+            };
+          }
+          return area;
+        })
+      );
 
-    // SlotList bleibt gleich, da beide Slots weiterhin belegt sind
-  }
-    handleClick(); // Modal schließen nach dem Wechsel
+    } else {
+      // 🟦 Slot belegt → Maschinen tauschen
+      setmachinelist(prev =>
+        prev.map(m => {
+          if (m.id === currentmachine.id) {
+            return { ...m, area: newAreaName, position: newSlotName };
+          }
+          if (m.id === targetMachine.id) {
+            return { ...m, area: currentmachine.area, position: currentmachine.position };
+          }
+          return m;
+        })
+      );
+
+      // 🔄 Beide Slots bleiben belegt → keine Änderung im occupied-Status nötig
+    }
+  
+    setTimeout(() => handleClick(), 0); // Modal schließen nach dem Wechsel
 };
 
 const handleChange = (field, value) => {
@@ -88,16 +108,23 @@ const handleChange = (field, value) => {
             <input value={currentmachine.kunde || ""} onChange={(e) => handleChange("kunde", e.target.value)} type="text" placeholder="Kunde" />
             <input value={currentmachine.kNummer || ""} onChange={(e) => handleChange("kNummer", e.target.value)} type="text" placeholder="K-Nummer" />
             <input value={currentmachine.date || ""} onChange={(e) => handleChange("date", e.target.value)} type="date" />
-            <p>Current Position{slotName}</p>
+            <p>Current Position{currentmachine.area} - {currentmachine.position}</p>
             <label>Switch to:</label>
             
-            <select value={machineposition} onChange={handleSwitch}>
-            <option value="">--Select Slot--</option>
-                {slotList.map(slot => (
-                <option key={slot.id} value={slot.slotName}>
+            <select value={selectedSlot} onChange={handleSwitch}>
+              <option value="" disabled>Bitte Slot auswählen...</option>
+              {areas.map(area => (
+              <optgroup key={area.id} label={area.name}>
+                {area.slots.map(slot => (
+                  <option
+                    key={slot.id}
+                    value={`${area.name}:${slot.slotName}`}
+                  >
                     {slot.slotName}
-                </option>
-            ))}
+                  </option>
+                ))}
+              </optgroup>
+                ))}
             </select>
 
             <button onClick={handleClick} > Back </button>

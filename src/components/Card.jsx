@@ -9,10 +9,11 @@ import Modal from './Modal';
 
 
 const Card = ({
-    machineid, 
-    slotName, 
-    setSlotList, 
-    slotList, 
+    areas,
+    setAreas,
+    slotName,
+    thisarea,
+    machineid,    
     machineposition,
     currentmachine, 
     machinelist,
@@ -37,8 +38,9 @@ const Card = ({
         <Modal 
             handleClick={handleClick}
             slotName={slotName}
-            setSlotList={setSlotList}
-            slotList={slotList}
+            setAreas={setAreas}
+            areas={areas}
+            thisarea={thisarea}
             machineid={machineid}
             machineposition={machineposition}
             currentmachine={currentmachine}
