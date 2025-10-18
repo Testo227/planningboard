@@ -1,0 +1,13 @@
+
+.PPM1-line {
+  display: grid;
+  grid-template-columns: repeat(4, calc((100% - 3 * 15px) / 4)); /* 4 Spalten, Gap berücksichtigen */
+  grid-auto-rows: 1fr;
+  gap: 15px;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-sizing: border-box;
+}

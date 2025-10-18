@@ -1,0 +1,15 @@
+.ppm1_end {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 15px;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-sizing: border-box;
+  overflow: hidden;
+}

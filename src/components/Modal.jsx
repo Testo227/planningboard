@@ -95,7 +95,7 @@ const handleChange = (field, value) => {
     
 
     return ( 
-        <div>
+        <div className='Modal'>
             <div className='leerslot'>
             <p>Leerslot</p>
             <label className="switch">

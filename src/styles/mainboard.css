@@ -1,0 +1,16 @@
+.MainBoard {
+  display: flex;
+  flex-direction: row; 
+  width: 100vw;               /* volle Bildschirmbreite */
+  height: 100vh;              /* volle Bildschirmhöhe */
+  gap: 15px;
+  padding: 10px;
+  background-image: url('/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  align-items: stretch;       
+  justify-content: space-between;
+  box-sizing: border-box;      /* Padding + Border innerhalb der Größe */
+  overflow: hidden;            /* verhindert Scrollbars */
+}

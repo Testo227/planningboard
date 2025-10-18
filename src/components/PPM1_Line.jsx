@@ -5,14 +5,14 @@ import { useState } from 'react';
 import Slot from './Slot';
 
 //CSS
-import '../styles/pool.css'
+import '../styles/ppm1line.css'
 
 
 const PPM1_Line = ({thisarea, areas, setAreas, machinelist, setmachinelist}) => {
 
    
     return ( 
-        <div className="pool">
+        <div className="PPM1-line">
 
                 {thisarea.slots.map(slot => (
                     <Slot 

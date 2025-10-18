@@ -4,6 +4,11 @@ import { useState } from 'react';
 //components
 import PPM1_Pool from './PPM1_Pool';
 import PPM1_Line from './PPM1_Line';
+import PPM1_NAorWait from './PPM1_NAorWait';
+
+//CSS
+import '../styles/ppm1.css'
+import '../styles/mainboard.css'
 
 
 const MainBoard = () => {
@@ -31,14 +36,21 @@ const MainBoard = () => {
             slots: [
             { id: 10, slotName: "Pos 1", occupied: false },
             { id: 11, slotName: "Pos 2", occupied: false },
+            { id: 12, slotName: "Pos 3", occupied: false },
+            { id: 13, slotName: "Pos 4", occupied: false },
+            { id: 14, slotName: "Pos 5", occupied: false },
+            { id: 15, slotName: "Pos 6", occupied: false },
+            { id: 16, slotName: "Pos 7", occupied: false },
+            { id: 17, slotName: "Pos 8", occupied: false }
             ]
         },
         {
             id: 3,
-            name: "PPM1-NA/Wait",
+            name: "PPM1-NAorWait",
             slots: [
-            { id: 12, slotName: "Pos 1", occupied: false },
-            { id: 13, slotName: "Pos 2", occupied: false },
+            { id: 18, slotName: "Pos 1", occupied: false },
+            { id: 19, slotName: "Pos 2", occupied: false },
+            { id: 20, slotName: "Pos 3", occupied: false }
             ]
         },
 ]);
@@ -54,20 +66,33 @@ const MainBoard = () => {
 
 
     return ( 
-        <div>
-            <PPM1_Pool 
-                machinelist={machinelist} 
-                setmachinelist={setmachinelist}
-                areas={areas}
-                thisarea={areas[0]}
-                setAreas={setAreas}/>
-            <PPM1_Line 
-                machinelist={machinelist} 
-                setmachinelist={setmachinelist}
-                areas={areas}
-                thisarea={areas[1]}
-                setAreas={setAreas}
-            />
+        <div className='MainBoard'>
+
+        
+            <div className='PPM1'> 
+                <PPM1_Pool
+                    machinelist={machinelist} 
+                    setmachinelist={setmachinelist}
+                    areas={areas}
+                    thisarea={areas[0]}
+                    setAreas={setAreas}> 
+                </PPM1_Pool>
+                <PPM1_Line 
+                    machinelist={machinelist} 
+                    setmachinelist={setmachinelist}
+                    areas={areas}
+                    thisarea={areas[1]}
+                    setAreas={setAreas}
+                />
+                <PPM1_NAorWait 
+                    machinelist={machinelist} 
+                    setmachinelist={setmachinelist}
+                    areas={areas}
+                    thisarea={areas[2]}
+                    setAreas={setAreas}
+                />
+
+            </div>
         </div>
      )
 }

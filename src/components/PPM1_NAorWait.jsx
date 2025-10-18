@@ -5,14 +5,14 @@ import { useState } from 'react';
 import Slot from './Slot';
 
 //CSS
-import '../styles/ppm1pool.css'
+import '../styles/ppm1_end.css'
 
 
-const PPM1_Pool = ({thisarea, areas, setAreas, machinelist, setmachinelist}) => {
+const PPM1_NAorWait = ({thisarea, areas, setAreas, machinelist, setmachinelist}) => {
 
    
     return ( 
-        <div className="PPM1-pool">
+        <div className="ppm1_end">
 
                 {thisarea.slots.map(slot => (
                     <Slot 
@@ -30,4 +30,4 @@ const PPM1_Pool = ({thisarea, areas, setAreas, machinelist, setmachinelist}) => 
      );
 }
  
-export default PPM1_Pool;
+export default PPM1_NAorWait;
